@@ -16,16 +16,16 @@ for N = 1:test_time
 % Define the symbolic variables
  
     ad_fng = sym('ad_fng','real');
-    A = sym('A%d%d',[N+3, 1]);
-    W = sym('W%d%d',[N+3 Width]);
+    A = sym('A%d%d',[N+10, 1]);
+    W = sym('W%d%d',[N+10 Width]);
 %% 原函数
-    Data1=exp(W*r1);
-    Data2=exp(W*r2);
-    Data3=exp(W*r3);
+    Data1=(W*r1).^2;
+    Data2=(W*r2).^2;
+    Data3=(W*r3).^2;
 %% Data Inner Product(内积线性相加) 带有一阶导数
-    Dot_Data1=exp(W*r1);
-    Dot_Data2=exp(W*r2);
-    Dot_Data3=exp(W*r3);
+    Dot_Data1=(W*r1);
+    Dot_Data2=(W*r2);
+    Dot_Data3=(W*r3);
 %% Put Sigma(激活函数)带有一阶导数
     Output_Data1=A.*Dot_Data1; 
     Output_Data2=A.*Dot_Data2;
@@ -47,7 +47,7 @@ for N = 1:test_time
     AA=A(:) ;
     SYM=[A,W];
     SYM=SYM(:);
-    n =10;
+    n =4;
  
 % Call the Lie Bracket Function
     ad_fng=liebracket(f,g,SYM,n);
