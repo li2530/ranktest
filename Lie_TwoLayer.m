@@ -2,11 +2,12 @@ clear
 clc
 close all
 % Define the data
-r1 = sym([ 0.8 0.6 0 ]');
+r1 = sym([1 0.0 0 ]');
  
 r2 = sym([ 0.0 1 0 ]');
+ 
 
-r3 = sym([0 0.8 0.6 ]');
+r3 = sym([0.0 0 1 ]');
 %%
 test_time=4
 documentation=1:test_time
@@ -19,13 +20,15 @@ for N = 1:test_time
     A = sym('A%d%d',[N+20, 1]);
     W = sym('W%d%d',[N+20 Width]);
 %% 原函数
-    Data1=(W*r1);
-    Data2=(W*r2);
-    Data3=(W*r3);
+ 
+    Data1=tanh(W*r1);
+    Data2=tanh(W*r2);
+    Data3=tanh(W*r3);
+ 
 %% Data Inner Product(内积线性相加) 带有一阶导数
-    Dot_Data1=(W*r1);
-    Dot_Data2=(W*r2);
-    Dot_Data3=(W*r3);
+    Dot_Data1=1-tanh(W*r1).^2;
+    Dot_Data2=1-tanh(W*r2).^2;
+    Dot_Data3=1-tanh(W*r3).^2;
 %% Put Sigma(激活函数)带有一阶导数
     Output_Data1=A.*Dot_Data1; 
     Output_Data2=A.*Dot_Data2;
@@ -47,7 +50,7 @@ for N = 1:test_time
     AA=A(:) ;
     SYM=[A,W];
     SYM=SYM(:);
-    n =4;
+    n =3;
  
 % Call the Lie Bracket Function
     ad_fng=liebracket(f,g,SYM,n);
