@@ -2,12 +2,12 @@ clear
 clc
 close all
 % Define the data
-r1 = sym([1 0.0 0 ]');
+r1 = sym([0.8 0.6 0 ]');
  
-r2 = sym([ 0.0 1 0 ]');
+r2 = sym([ 0.0 0.6 0.8 ]');
  
 
-r3 = sym([0.0 0 1 ]');
+r3 = sym([0.0 0.8 0.6 ]');
 %%
 test_time=4
 documentation=1:test_time
