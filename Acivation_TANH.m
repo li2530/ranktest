@@ -2,34 +2,34 @@ clear
 clc
 close all
 % Define the data
-r1 = sym([ 0.8 0.6 0 ]');
+r1 = sym([ 0.8 0.6 ]');
  
-r2 = sym([ 0.0 1 0 ]');
+r2 = sym([ 0.6 0.8 ]');
 
-r3 = sym([0 0.8 0.6 ]');
+%r3 = sym([0 0.8 0.6 ]');
 %%
 test_time=4
 documentation=1:test_time
 for N = 1:test_time
 %% Set Hyper-Parameter
-    Width = 3
+    Width = 2
 % Define the symbolic variables
  
     ad_fng = sym('ad_fng','real');
     A = sym('A%d%d',[N+20, 1]);
     W = sym('W%d%d',[N+20 Width]);
 %% 原函数
-    Data1=(W*r1);
-    Data2=(W*r2);
-    Data3=(W*r3);
+    Data1=tanh(W*r1);
+    Data2=tanh(W*r2);
+    %Data3=tanh(W*r3);
 %% Data Inner Product(内积线性相加) 带有一阶导数
-    Dot_Data1=(W*r1);
-    Dot_Data2=(W*r2);
-    Dot_Data3=(W*r3);
+    Dot_Data1=1-tanh(W*r1).^2;
+    Dot_Data2=1-tanh(W*r2).^2;
+    %Dot_Data3=1-tanh(W*r3);
 %% Put Sigma(激活函数)带有一阶导数
     Output_Data1=A.*Dot_Data1; 
     Output_Data2=A.*Dot_Data2;
-    Output_Data3=A.*Dot_Data3;
+    %Output_Data3=A.*Dot_Data3;
 %% Tensor Product
     f=Output_Data1*r1';
     ff=[Data1,f];
@@ -39,9 +39,9 @@ for N = 1:test_time
     gg=[Data2,g]
     g=gg(:) ;
     
-    h= Output_Data3*r3';
-    hh=[Data3,h]
-    h=hh(:) ;
+    %h= Output_Data3*r3';
+    %hh=[Data3,h]
+    %h=hh(:) ;
     
     WW=W(:);
     AA=A(:) ;
