@@ -4,7 +4,7 @@ close all
 % Define the data
 r1 = sym([0.8 0.6 0 ]');
  
-r2 = sym([ 0.0 0.6 0.8 ]');
+r2 = sym([ 0.0 0.0 1 ]');
  
 
 r3 = sym([0.0 0.8 0.6 ]');
@@ -50,7 +50,7 @@ for N = 1:test_time
     AA=A(:) ;
     SYM=[A,W];
     SYM=SYM(:);
-    n =3;
+    n =5;
  
 % Call the Lie Bracket Function
     ad_fng=liebracket(f,g,SYM,n);
